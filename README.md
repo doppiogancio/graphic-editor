@@ -71,7 +71,23 @@ $settings->shapes[] = (object) [
 ];
 
 try {
-	$graphic_editor->loadSettings($settings);
+    if ( empty($settings->save_as) ) {
+		throw new SettingRequiredException("save_as attribute is required to generate an image!");
+	}
+
+	if ( empty($settings->save_as->file_type) ) {
+		throw new SettingRequiredException("save_as/file_type attribute is required to generate an image!");
+	}
+
+	if ( empty($settings->save_as->file_name) ) {
+		throw new SettingRequiredException("save_as/file_name attribute is required to generate an image!");
+	}
+
+	// Load all settings at once
+    $graphic_editor->loadSettings($settings);
+
+    // Create and save the image file as defined in the $settings array
+    $graphic_editor->save( $settings->save_as->file_type, $settings->save_as->file_name );
 }
 catch (Exception $e) {
 	die($e->getMessage());
