@@ -8,16 +8,18 @@ Overview
 
 This class let you create an image using a list of shapes. You will be able to use it also via command line.
 
-# Command line
+Command line
+--------
 ```php
 php -f index.php '{"width":500,"height":500,"background_color":[0,100,255],"save_as":{"file_type":"png","file_name":"from_json.png"},"shapes":[{"type":"circle","left":200,"top":150,"width":300,"height":255,"filler_color":[0,255,255]},{"type":"square","left":0,"top":0,"width":50,"filler_color":[255,0,255],"border":{"color":[10,10,255]}},{"type":"ellipse","left":300,"top":200,"width":50,"height":10,"filler_color":[255,0,0],"border":{"color":[55,255,255]}},{"type":"polygon","filler_color":[255,255,0],"points":[[250,0],[500,500],[0,500]]}]}'
 ```
 
-# Programmatically with settings array
+Programmatically with settings array
+--------
 ```php
 <?php
 
-require_once "lib/autoloader.php";
+require_once "src/autoloader.php";
 
 $graphic_editor = new GraphicEditor();
 
