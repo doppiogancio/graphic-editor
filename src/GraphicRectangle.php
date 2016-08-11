@@ -1,9 +1,9 @@
 <?php
 
 class GraphicRectangle extends Graphic {
-	public function draw() {
+	public function draw(GraphicEditor $editor) {
 
-		$image = $this->graphic_editor->getImage();
+		$image = $editor->getImage();
 
 		$filler_color = imagecolorallocate($image, $this->filler_color[0], $this->filler_color[1], $this->filler_color[2]);
 

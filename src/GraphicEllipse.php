@@ -2,11 +2,11 @@
 
 class GraphicEllipse extends Graphic {
 
-	public function draw() {
+	public function draw(GraphicEditor $editor) {
 
 
 		// create a blank image
-		$image = $this->graphic_editor->getImage();
+		$image = $editor->getImage();
 
 		// choose a color for the ellipse
 		$col_ellipse = imagecolorallocate($image, $this->filler_color[0], $this->filler_color[1], $this->filler_color[2]);

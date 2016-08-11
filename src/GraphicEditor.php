@@ -25,7 +25,7 @@ class GraphicEditor {
 
 	protected function draw() {
 		foreach ($this->graphics as $graphic) {
-			$graphic->draw();
+			$graphic->draw($this);
 		}
 	}
 
@@ -35,10 +35,7 @@ class GraphicEditor {
 	 * @return $this
 	 */
 	public function addGraphic( Graphic $graphic ) {
-
-		$graphic->setGraphicEditor($this);
 		$this->graphics[] = $graphic;
-
 		return $this;
 	}
 

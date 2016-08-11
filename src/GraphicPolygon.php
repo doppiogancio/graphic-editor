@@ -21,11 +21,10 @@ class GraphicPolygon extends Graphic {
 		return $points;
 	}
 
-	public function draw() {
-
+	public function draw(GraphicEditor $editor) {
 
 		// create a blank image
-		$image = $this->graphic_editor->getImage();
+		$image = $editor->getImage();
 
 		// choose a color for the ellipse
 		$filler_color = imagecolorallocate($image, $this->filler_color[0], $this->filler_color[1], $this->filler_color[2]);
