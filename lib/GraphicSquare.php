@@ -1,11 +1,15 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: fabriziogargiulo
- * Date: 09/08/16
- * Time: 20:30
- */
-class GraphicSquare {
+class GraphicSquare extends GraphicRectangle {
+
+	public function __construct( $settings ) {
+		parent::__construct( $settings );
+
+		if ( empty($this->settings['width']) ) {
+			throw new SettingRequiredException("Width is a required setting for GraphicSquare!");
+		}
+
+		$this->settings['height'] = $this->settings['width'];
+	}
 
 }
