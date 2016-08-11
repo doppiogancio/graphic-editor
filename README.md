@@ -8,6 +8,9 @@ Overview
 
 This class let you create an image using a list of shapes. You will be able to use it also via command line.
 
+Usages
+=========================
+
 Command line
 --------
 ```php
@@ -96,4 +99,26 @@ catch (Exception $e) {
 }
 
 $graphic_editor->savePNG("a_name");
+```
+
+Using specific Graphic shape classes
+--------
+```php
+[...]
+
+$pink_square = new GraphicSquare((object) [
+    'width' => 50,
+    'filler_color' => [255, 0, 255],
+    'border' => ['color' => [255, 255, 255]]
+]);
+
+// Move it 10px from top
+$pink_square->top = 10;
+
+// ...and 50px from left
+$pink_square->left = 50;
+
+$graphic_editor->addGraphic($pink_square);
+
+[...]
 ```
