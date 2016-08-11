@@ -73,16 +73,32 @@ class GraphicEditor {
 	}
 
 	public function saveJPG( $name ) {
-		// TODO: draw su tutte le immagini
+
+		$this->draw();
+		imagejpg( $this->image, $name );
 	}
 
 	public function savePNG( $name ) {
 
 		$this->draw();
+		imagepng( $this->image, $name );
+	}
 
-		// output the picture
-		header( "Content-type: image/png" );
-		imagepng( $this->image );
+	public function save( $file_type, $name ) {
+
+		switch ( strtolower($file_type) ) {
+			case 'png':
+				$this->savePNG($name);
+				break;
+
+			case 'jpg':
+				$this->saveJPG($name);
+				break;
+
+			default:
+				throw new FileTypeNotSupportedException( sprintf("File type '%s' is not yet supported!" ) );
+				break;
+		}
 	}
 
 }
