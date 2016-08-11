@@ -14,9 +14,9 @@ class GraphicEllipse extends Graphic {
 		// draw the white ellipse
 		imagefilledellipse($image, $this->left, $this->top, $this->width, $this->height, $col_ellipse);
 
-		if ( isset($this->border['color']) ) {
+		if ( isset($this->border->color) ) {
 			// border color
-			$border_color = imagecolorallocate($image, $this->border['color'][0], $this->border['color'][1], $this->border['color'][2]);
+			$border_color = imagecolorallocate($image, $this->border->color[0], $this->border->color[1], $this->border->color[2]);
 			imageellipse ( $image, $this->left, $this->top, $this->width, $this->height, $border_color);
 		}
 

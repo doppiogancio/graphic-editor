@@ -42,26 +42,26 @@ class GraphicEditor {
 
 	public function loadSettings( $settings ) {
 
-		if ( empty($settings['width']) ) {
+		if ( empty($settings->width) ) {
 			throw new SettingRequiredException("Width is a required setting for GraphicEditor!");
 		}
 
-		if ( empty($settings['height']) ) {
+		if ( empty($settings->height) ) {
 			throw new SettingRequiredException("Height is a required setting for GraphicEditor!");
 		}
 
-		$this->width = $settings['width'];
-		$this->height = $settings['height'];
+		$this->width = $settings->width;
+		$this->height = $settings->height;
 
 		// Create again the image
 		$this->_create_image();
 
-		if ( !empty($settings['background_color']) ) {
-			$this->setBackgroundColor($settings['background_color']);
+		if ( !empty($settings->background_color) ) {
+			$this->setBackgroundColor($settings->background_color);
 		}
 
-		foreach ( $settings['shapes'] as $settings ) {
-			$graphic = Graphic::create( $settings['type'], $settings );
+		foreach ( $settings->shapes as $settings ) {
+			$graphic = Graphic::create( $settings->type, $settings );
 			$this->addGraphic( $graphic );
 		}
 

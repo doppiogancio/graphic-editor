@@ -13,7 +13,9 @@ abstract class Graphic implements iDrawable {
 			'filler_color' => array(255, 255, 255),
 		);
 
-		$this->settings = array_merge($default_settings, $settings);
+		//$this->settings = array_merge($default_settings, $settings);
+
+		$this->settings = (object) array_merge($default_settings, (array) $settings);
 	}
 
 	static public function create( $shape, $settings ) {
@@ -36,6 +38,6 @@ abstract class Graphic implements iDrawable {
 	}
 
 	public function __get($name) {
-		return $this->settings[$name];
+		return $this->settings->{$name};
 	}
 }

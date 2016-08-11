@@ -5,7 +5,7 @@ class GraphicPolygon extends Graphic {
 	public function __construct( $settings ) {
 		parent::__construct( $settings );
 
-		if ( empty($this->settings['points']) ) {
+		if ( empty($this->settings->points) ) {
 			throw new SettingRequiredException("Points are a required setting for GraphicPolygon!");
 		}
 	}
