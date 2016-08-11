@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class GraphicEditor
+ */
 class GraphicEditor {
 
 	protected $width;
@@ -26,6 +29,11 @@ class GraphicEditor {
 		}
 	}
 
+	/**
+	 * Add a new graphic shape to the image
+	 * @param Graphic $graphic
+	 * @return $this
+	 */
 	public function addGraphic( Graphic $graphic ) {
 
 		$graphic->setGraphicEditor($this);
@@ -34,12 +42,24 @@ class GraphicEditor {
 		return $this;
 	}
 
+	/**
+	 * Set the background color to the image using an array in RGB format
+	 * @param array $rgb_color
+	 */
 	public function setBackgroundColor( array $rgb_color ) {
 		// fill the background color
 		$background_color = imagecolorallocate($this->image, $rgb_color[0], $rgb_color[1], $rgb_color[2]);
 		imagefilledrectangle($this->image, 0, 0, $this->width, $this->height, $background_color);
 	}
 
+	/**
+	 * Load all image and shapes settings at once using an object
+	 * @param $settings
+	 *
+	 * @return $this
+	 * @throws GraphicNotFoundException
+	 * @throws SettingRequiredException
+	 */
 	public function loadSettings( $settings ) {
 
 		if ( empty($settings->width) ) {
@@ -68,23 +88,41 @@ class GraphicEditor {
 		return $this;
 	}
 
+	/**
+	 * Get image resource
+	 * @return mixed
+	 */
 	public function getImage() {
 		return $this->image;
 	}
 
-	// SAVE FUNCTIONS
+	/**
+	 * Save as JPG
+	 * @param $name
+	 */
 	public function saveJPG( $name ) {
 
 		$this->draw();
 		imagejpg( $this->image, $name );
 	}
 
+	/**
+	 * Save as PNG
+	 * @param $name
+	 */
 	public function savePNG( $name ) {
 
 		$this->draw();
 		imagepng( $this->image, $name );
 	}
 
+	/**
+	 * Save this image passing type and name
+	 * @param $file_type
+	 * @param $name
+	 *
+	 * @throws FileTypeNotSupportedException
+	 */
 	public function save( $file_type, $name ) {
 
 		switch ( strtolower($file_type) ) {
