@@ -18,24 +18,13 @@ abstract class Graphic implements iDrawable {
 
 	static public function create( $shape, $settings ) {
 
-		// TODO: renderlo universale, magari con concatenazione di stringhe, camel case, etc..
-		// TODO: ad ogni modo bisogna sempre controllare che esista la determinata classe, in caso contrario lanciare la GraphicNotFoundException
-		switch ( $shape ) {
-			case 'ellipse':
-				return new GraphicEllipse( $settings );
+		$class_name = sprintf( "Graphic%s", ucfirst($shape) );
 
-			case 'circle':
-				return new GraphicCircle( $settings );
-
-			case 'rectangle':
-				return new GraphicRectangle( $settings );
-
-			case 'square':
-				return new GraphicSquare( $settings );
-
-			default:
-				throw new GraphicNotFoundException( sprintf( "Graphic '%s' not found", $shape ) );
+		if ( !class_exists($class_name) ) {
+			throw new GraphicNotFoundException( sprintf( "Graphic '%s' not found", $shape ) );
 		}
+
+		return new $class_name( $settings );
 	}
 
 	public function setGraphicEditor(GraphicEditor $graphic_editor) {
