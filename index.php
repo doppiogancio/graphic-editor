@@ -1,6 +1,6 @@
 <?php
 
-require_once "lib/autoloader.php";
+require_once "src/autoloader.php";
 
 $graphic_editor = new GraphicEditor();
 
