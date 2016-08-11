@@ -15,6 +15,17 @@ class GraphicEditor {
 		$this->graphics = array();
 	}
 
+	protected function _create_image() {
+		// create a blank image
+		$this->image = imagecreatetruecolor( $this->width, $this->height );
+	}
+
+	protected function draw() {
+		foreach ($this->graphics as $graphic) {
+			$graphic->draw();
+		}
+	}
+
 	public function addGraphic( Graphic $graphic ) {
 
 		$graphic->setGraphicEditor($this);
@@ -49,8 +60,8 @@ class GraphicEditor {
 			$this->setBackgroundColor($settings['background_color']);
 		}
 
-		foreach ( $settings['shapes'] as $shape => $settings ) {
-			$graphic = Graphic::create( $shape, $settings );
+		foreach ( $settings['shapes'] as $settings ) {
+			$graphic = Graphic::create( $settings['type'], $settings );
 			$this->addGraphic( $graphic );
 		}
 
@@ -61,17 +72,7 @@ class GraphicEditor {
 		return $this->image;
 	}
 
-	protected function _create_image() {
-		// create a blank image
-		$this->image = imagecreatetruecolor( $this->width, $this->height );
-	}
-
-	protected function draw() {
-		foreach ($this->graphics as $graphic) {
-			$graphic->draw();
-		}
-	}
-
+	// SAVE FUNCTIONS
 	public function saveJPG( $name ) {
 
 		$this->draw();
