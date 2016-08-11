@@ -1,11 +1,43 @@
 <?php
 
-spl_autoload_register(function ($class_name) {
-	include "lib/" . $class_name . '.php';
-});
+require_once "lib/autoloader.php";
 
-$graphic_editor = new GraphicEditor();
+$graphic_editor = new GraphicEditor(700, 300);
 
-$graphic_editor->loadFromArray(array(
-	'circle' => array(),
-));
+try {
+	$graphic_editor->loadSettings([
+		'width' => 500,
+		'height' => 500,
+		'background_color' => [00, 100, 255],
+		'shapes' => [
+			'circle' => [
+				'left' => 200,
+				'top' => 150,
+				'width' => 300,
+				'height' => 255,
+				'filler_color' => [55, 0, 255]
+			],
+			'square' => [
+				'left' => 0,
+				'top' => 0,
+				'width' => 50,
+				'filler_color' => [255, 0, 255],
+				'border' => ['color' => [255, 255, 255]]
+			],
+			'ellipse' => [
+				'left' => 300,
+				'top' => 200,
+				'width' => 50,
+				'height' => 10,
+				'filler_color' => [255, 0, 0],
+				'border' => ['color' => [55, 255, 255]]
+			]
+		]
+	]);
+}
+catch (Exception $e) {
+	die($e->getMessage());
+}
+
+$graphic_editor->savePNG("un_nome");
+
